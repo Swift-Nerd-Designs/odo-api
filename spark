@@ -1,0 +1,21 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * CodeIgniter CLI Entry Point
+ *
+ * @see https://codeigniter.com/user_guide/cli/spark_commands.html
+ */
+
+// Require the Composer autoloader
+require_once __DIR__ . '/vendor/autoload.php';
+
+// Load the Paths config
+require_once __DIR__ . '/app/Config/Paths.php';
+
+$paths = new Config\Paths();
+
+// Boot the framework in CLI mode
+require rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'Boot.php';
+
+exit(CodeIgniter\Boot::bootSpark($paths));
