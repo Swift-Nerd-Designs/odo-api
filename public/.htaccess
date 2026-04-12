@@ -1,6 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # Required when the API lives at /api/ (not the domain root)
+    RewriteBase /api/
+
     # Handle CORS preflight OPTIONS requests
     RewriteCond %{REQUEST_METHOD} OPTIONS
     RewriteRule .* - [R=200,L]
@@ -12,11 +15,10 @@
 </IfModule>
 
 <IfModule !mod_rewrite.c>
-    # If mod_rewrite is not available, all requests must include index.php/
     ErrorDocument 404 index.php
 </IfModule>
 
-# Deny direct access to the application
+# Deny direct access to dotfiles
 <FilesMatch "^\.">
     Order allow,deny
     Deny from all
