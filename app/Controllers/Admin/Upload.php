@@ -3,11 +3,12 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use Cloudinary\Cloudinary;
 
 class Upload extends BaseController
 {
     private const ALLOWED_MIME = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-    private const MAX_BYTES     = 5 * 1024 * 1024; // 5 MB
+    private const MAX_BYTES    = 5 * 1024 * 1024; // 5 MB
 
     public function store(): \CodeIgniter\HTTP\ResponseInterface
     {
@@ -25,15 +26,21 @@ class Upload extends BaseController
             return $this->error('File must be under 5 MB.', 422);
         }
 
-        $uploadDir = FCPATH . 'uploads' . DIRECTORY_SEPARATOR;
+        try {
+            $cloudinary = new Cloudinary(getenv('CLOUDINARY_URL'));
 
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
+            $result = $cloudinary->uploadApi()->upload(
+                $file->getTempName(),
+                [
+                    'folder'        => 'jnv/images',
+                    'resource_type' => 'image',
+                ]
+            );
+
+            return $this->json(['url' => $result['secure_url']]);
+        } catch (\Exception $e) {
+            log_message('error', 'Cloudinary image upload failed: ' . $e->getMessage());
+            return $this->error('Upload failed. Please try again.', 500);
         }
-
-        $filename = $file->getRandomName();
-        $file->move($uploadDir, $filename);
-
-        return $this->json(['url' => '/uploads/' . $filename]);
     }
 }

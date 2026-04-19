@@ -2,13 +2,10 @@
 
 namespace App\Controllers;
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception as PHPMailerException;
-
 /**
  * Contact
  *
- * Handles the public contact form submission via PHPMailer / SMTP.
+ * Handles the public contact form submission via Resend.
  * Route: POST /contact
  */
 class Contact extends BaseController
@@ -31,68 +28,30 @@ class Contact extends BaseController
             return $this->error('Invalid email address.', 400);
         }
 
-        // ── SMTP config from .env ────────────────────────────────────
-        $smtpHost   = env('email.SMTPHost',   'smtp.gmail.com');
-        $smtpPort   = (int) env('email.SMTPPort',   587);
-        $smtpUser   = env('email.SMTPUser',   '');
-        $smtpPass   = env('email.SMTPPass',   '');
-        $smtpCrypto = env('email.SMTPCrypto', 'tls');  // 'tls' or 'ssl'
-        $fromEmail  = env('email.fromEmail',  $smtpUser);
-        $fromName   = env('email.fromName',   'JNV Training and Development');
-        $toEmail    = env('jnv.contactToEmail', $fromEmail);
+        $apiKey  = getenv('RESEND_API_KEY');
+        $from    = getenv('RESEND_FROM') ?: 'noreply@jnv.co.za';
+        $toEmail = getenv('jnv.contactToEmail') ?: 'info@jnv.co.za';
 
-        if (empty($smtpHost) || empty($smtpUser) || empty($smtpPass)) {
-            log_message('error', 'Contact form: SMTP not configured in .env');
+        if (empty($apiKey)) {
+            log_message('error', 'Contact form: RESEND_API_KEY not set in .env');
             return $this->error('Email delivery is not configured on this server.', 503);
         }
 
-        // ── PHPMailer ────────────────────────────────────────────────
-        $mail = new PHPMailer(true);
-
         try {
-            $mail->isSMTP();
-            $mail->Host       = $smtpHost;
-            $mail->SMTPAuth   = true;
-            $mail->Username   = $smtpUser;
-            $mail->Password   = $smtpPass;
-            $mail->SMTPSecure = $smtpCrypto === 'ssl'
-                ? PHPMailer::ENCRYPTION_SMTPS
-                : PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = $smtpPort;
-            $mail->CharSet    = PHPMailer::CHARSET_UTF8;
-            $mail->Encoding   = PHPMailer::ENCODING_BASE64;
+            $resend = \Resend::client($apiKey);
 
-            $mail->setFrom($fromEmail, $fromName);
-            $mail->addAddress($toEmail);
-            $mail->addReplyTo($email, $name);
-
-            $mail->Subject = 'Enquiry: ' . ($service ?: 'General') . ' — ' . $name;
-
-            // Plain-text alternative (improves deliverability / spam score)
-            $mail->AltBody = implode("\n", [
-                'New website enquiry from jnv.co.za',
-                str_repeat('─', 40),
-                'Name:    ' . $name,
-                'Email:   ' . $email,
-                'Phone:   ' . ($phone ?: 'Not provided'),
-                'Service: ' . ($service ?: 'Not specified'),
-                str_repeat('─', 40),
-                $message,
+            $resend->emails->send([
+                'from'     => 'JNV Training & Development <' . $from . '>',
+                'to'       => [$toEmail],
+                'reply_to' => $email,
+                'subject'  => 'Enquiry: ' . ($service ?: 'General') . ' — ' . $name,
+                'html'     => $this->buildHtml($name, $email, $phone, $service, $message),
             ]);
-
-            $mail->isHTML(true);
-            $mail->Body = $this->buildHtml($name, $email, $phone, $service, $message);
-
-            $mail->addCustomHeader('X-Mailer',   'JNV-Website/1.0');
-            $mail->addCustomHeader('X-Priority', '3');
-            $mail->addCustomHeader('Importance', 'Normal');
-
-            $mail->send();
 
             return $this->ok();
 
-        } catch (PHPMailerException $e) {
-            log_message('error', 'Contact form PHPMailer error: ' . $mail->ErrorInfo);
+        } catch (\Exception $e) {
+            log_message('error', 'Contact form Resend error: ' . $e->getMessage());
             return $this->error('Failed to send message. Please try again later.', 500);
         }
     }
@@ -113,7 +72,6 @@ class Contact extends BaseController
 
     // ----------------------------------------------------------------
     // HTML email template
-    // Fully inlined for Outlook / Gmail / Apple Mail compatibility.
     // ----------------------------------------------------------------
 
     private function buildHtml(

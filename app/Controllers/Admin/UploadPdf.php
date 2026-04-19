@@ -3,12 +3,12 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use Cloudinary\Cloudinary;
 
 /**
  * Admin\UploadPdf
  *
- * Accepts a PDF file upload and saves it to public/uploads/pdfs/.
- * Called by the Nuxt AdminPdfDropzone when Cloudinary is not configured.
+ * Accepts a PDF upload and stores it on Cloudinary under jnv/documents.
  * Route: POST /admin/upload-pdf  (adminauth filter)
  */
 class UploadPdf extends BaseController
@@ -23,7 +23,6 @@ class UploadPdf extends BaseController
             return $this->error('No valid file provided.', 422);
         }
 
-        // Validate PDF
         $mime = $file->getMimeType();
         $name = strtolower($file->getClientName());
 
@@ -35,16 +34,36 @@ class UploadPdf extends BaseController
             return $this->error('File must be under 20 MB.', 422);
         }
 
-        $uploadDir = FCPATH . 'uploads' . DIRECTORY_SEPARATOR . 'pdfs' . DIRECTORY_SEPARATOR;
+        try {
+            $cloudinary = new Cloudinary(getenv('CLOUDINARY_URL'));
 
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
+            // Strip extension for the public_id, Cloudinary preserves the original name
+            $publicId = 'jnv/documents/' . pathinfo($file->getClientName(), PATHINFO_FILENAME);
+
+            $result = $cloudinary->uploadApi()->upload(
+                $file->getTempName(),
+                [
+                    'public_id'     => $publicId,
+                    'resource_type' => 'raw',
+                    'use_filename'  => true,
+                    'unique_filename' => true,
+                ]
+            );
+
+            return $this->json([
+                'url'      => $result['secure_url'],
+                'filename' => $file->getClientName(),
+                'size'     => $this->formatBytes($file->getSize()),
+            ]);
+        } catch (\Exception $e) {
+            log_message('error', 'Cloudinary PDF upload failed: ' . $e->getMessage());
+            return $this->error('Upload failed. Please try again.', 500);
         }
+    }
 
-        // Use a random name to prevent collisions / path traversal
-        $filename = bin2hex(random_bytes(8)) . '-' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientName());
-        $file->move($uploadDir, $filename);
-
-        return $this->json(['url' => '/uploads/pdfs/' . $filename]);
+    private function formatBytes(int $bytes): string
+    {
+        $mb = $bytes / 1024 / 1024;
+        return 'PDF · ~' . round($mb, 1) . ' MB';
     }
 }
