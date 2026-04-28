@@ -34,11 +34,10 @@ class MainSeeder extends Seeder
             // Default password is "changeme" — MUST be changed after first deploy
             'admin_password_hash' => password_hash('changeme', PASSWORD_BCRYPT),
 
-            // Replace these with client-specific values
-            'site_name'  => 'Client Site',
-            'email'      => 'hello@clientdomain.com',
-            'phone'      => '',
-            'address'    => '',
+            'site_name'  => 'Odo Group',
+            'email'      => 'consultation@odocorp.co.za',
+            'phone'      => '+27 82 870 7275',
+            'address'    => '35 Tsitsikame Street, Secunda, MP 2302',
         ];
 
         foreach ($settings as $key => $value) {
@@ -73,22 +72,26 @@ class MainSeeder extends Seeder
 
             // ── Home ──────────────────────────────────────────────────────
             'home' => [
-                'seoTitle'       => 'Home — Client Site',
-                'seoDescription' => 'Welcome to our website.',
+                'seoTitle'       => 'Odo Group | IT Support & Managed Services Provider',
+                'seoDescription' => 'Empowering businesses with reliable IT solutions. Managed services, cybersecurity, network design and more.',
                 'content'        => (object) [],
             ],
 
-            // ── About ─────────────────────────────────────────────────────
             'about' => [
-                'seoTitle'       => 'About — Client Site',
-                'seoDescription' => 'Learn more about us.',
+                'seoTitle'       => 'About — Odo Group',
+                'seoDescription' => 'Learn about Odo Group — our vision, mission and core values as a trusted IT partner.',
                 'content'        => (object) [],
             ],
 
-            // ── Contact ───────────────────────────────────────────────────
+            'services' => [
+                'seoTitle'       => 'Services — Odo Group',
+                'seoDescription' => 'Comprehensive managed IT services including 24/7 support, cybersecurity, network management and more.',
+                'content'        => (object) [],
+            ],
+
             'contact' => [
-                'seoTitle'       => 'Contact — Client Site',
-                'seoDescription' => 'Get in touch with us.',
+                'seoTitle'       => 'Contact — Odo Group',
+                'seoDescription' => 'Get in touch with Odo Group. We\'re based in Secunda, MP.',
                 'content'        => (object) [],
             ],
 
