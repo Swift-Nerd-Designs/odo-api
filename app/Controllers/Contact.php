@@ -29,8 +29,8 @@ class Contact extends BaseController
         }
 
         $apiKey  = getenv('RESEND_API_KEY');
-        $from    = getenv('RESEND_FROM') ?: 'noreply@jnv.co.za';
-        $toEmail = getenv('jnv.contactToEmail') ?: 'info@jnv.co.za';
+        $from    = getenv('RESEND_FROM') ?: 'noreply@contact.clientdomain.com';
+        $toEmail = getenv('app.contactToEmail') ?: 'hello@clientdomain.com';
 
         if (empty($apiKey)) {
             log_message('error', 'Contact form: RESEND_API_KEY not set in .env');
@@ -41,7 +41,7 @@ class Contact extends BaseController
             $resend = \Resend::client($apiKey);
 
             $resend->emails->send([
-                'from'     => 'JNV Training & Development <' . $from . '>',
+                'from'     => 'Website Contact Form <' . $from . '>',
                 'to'       => [$toEmail],
                 'reply_to' => $email,
                 'subject'  => 'Enquiry: ' . ($service ?: 'General') . ' — ' . $name,
@@ -85,14 +85,14 @@ class Contact extends BaseController
         $submittedAt = date('l, d F Y \a\t H:i');
 
         $phoneTd = $phone
-            ? '<a href="tel:' . $this->e(preg_replace('/\s+/', '', $phone)) . '" style="color:#1a6b3c;text-decoration:none;">' . $this->e($phone) . '</a>'
+            ? '<a href="tel:' . $this->e(preg_replace('/\s+/', '', $phone)) . '" style="color:#2563eb;text-decoration:none;">' . $this->e($phone) . '</a>'
             : '<span style="color:#9ca3af;">Not provided</span>';
 
         $serviceBadge = $service
-            ? '<span style="display:inline-block;background-color:#dcfce7;color:#166534;font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">' . $this->e($service) . '</span>'
+            ? '<span style="display:inline-block;background-color:#dbeafe;color:#1e40af;font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">' . $this->e($service) . '</span>'
             : '<span style="color:#9ca3af;">Not specified</span>';
 
-        $replySubject = rawurlencode('Re: Your JNV Enquiry');
+        $replySubject = rawurlencode('Re: Your Enquiry');
         $serviceLabel = $this->e($service ?: 'General');
         $eName        = $this->e($name);
         $eEmail       = $this->e($email);
@@ -108,7 +108,7 @@ class Contact extends BaseController
   <!--[if !mso]><!-->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!--<![endif]-->
-  <title>New Website Enquiry — JNV</title>
+  <title>New Website Enquiry</title>
   <!--[if mso]>
   <noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
   <![endif]-->
@@ -132,14 +132,14 @@ class Contact extends BaseController
       <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600"
         style="max-width:600px;width:100%;background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
 
-        <!-- Green header -->
+        <!-- Header -->
         <tr>
-          <td style="background-color:#1a6b3c;padding:28px 36px;">
+          <td style="background-color:#1e3a5f;padding:28px 36px;">
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
               <tr>
                 <td>
-                  <p style="margin:0;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#a8d5b5;">
-                    JNV Training &amp; Development
+                  <p style="margin:0;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#93c5fd;">
+                    Website Contact Form
                   </p>
                   <h1 style="margin:6px 0 0;font-size:22px;font-weight:700;color:#ffffff;line-height:1.3;">
                     New Website Enquiry
@@ -149,7 +149,7 @@ class Contact extends BaseController
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td style="background-color:rgba(255,255,255,0.15);border-radius:8px;padding:8px 14px;">
-                        <p style="margin:0;font-size:11px;color:#d1f0dc;font-weight:600;">$serviceLabel</p>
+                        <p style="margin:0;font-size:11px;color:#bfdbfe;font-weight:600;">$serviceLabel</p>
                       </td>
                     </tr>
                   </table>
@@ -173,7 +173,7 @@ class Contact extends BaseController
               <tr>
                 <td width="120" style="padding:12px 16px;font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:#6b7280;border-bottom:1px solid #e5e7eb;white-space:nowrap;background-color:#f9fafb;">Email</td>
                 <td style="padding:12px 16px;font-size:14px;color:#111827;border-bottom:1px solid #e5e7eb;">
-                  <a href="mailto:$eEmail" style="color:#1a6b3c;text-decoration:none;font-weight:500;">$eEmail</a>
+                  <a href="mailto:$eEmail" style="color:#2563eb;text-decoration:none;font-weight:500;">$eEmail</a>
                 </td>
               </tr>
               <tr style="background-color:#f9fafb;">
@@ -206,7 +206,7 @@ class Contact extends BaseController
                 <td align="center">
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                      <td style="border-radius:8px;background-color:#1a6b3c;">
+                      <td style="border-radius:8px;background-color:#1e3a5f;">
                         <a href="mailto:$eEmail?subject=$replySubject"
                           style="display:inline-block;padding:12px 28px;font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:8px;">
                           &#9993;&nbsp; Reply to $eName
@@ -228,14 +228,11 @@ class Contact extends BaseController
               <tr>
                 <td>
                   <p style="margin:0;font-size:11px;color:#9ca3af;line-height:1.6;">
-                    Submitted via jnv.co.za &bull; $submittedAt
+                    Submitted via website contact form &bull; $submittedAt
                   </p>
                   <p style="margin:4px 0 0;font-size:11px;color:#9ca3af;">
-                    Sent from the JNV website contact form. Reply directly to reach the enquirer.
+                    Reply directly to reach the enquirer.
                   </p>
-                </td>
-                <td align="right" valign="middle">
-                  <p style="margin:0;font-size:11px;font-weight:700;color:#1a6b3c;letter-spacing:1px;">JNV</p>
                 </td>
               </tr>
             </table>
@@ -249,7 +246,7 @@ class Contact extends BaseController
         <tr>
           <td align="center" style="padding:16px 0 0;">
             <p style="margin:0;font-size:11px;color:#9ca3af;">
-              &copy; $year JNV Training and Development. All rights reserved.
+              &copy; $year All rights reserved.
             </p>
           </td>
         </tr>

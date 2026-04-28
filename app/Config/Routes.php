@@ -5,7 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /** @var RouteCollection $routes */
 
 // ----------------------------------------------------------------
-// JNV API Routes
+// Client API Routes
 // ----------------------------------------------------------------
 
 // Disable auto-routing — everything is explicit
@@ -18,8 +18,6 @@ $routes->setTranslateURIDashes(false);
 // Public content routes (no authentication required)
 // ----------------------------------------------------------------
 $routes->get('content/settings',           'Content\Settings::index');
-$routes->get('content/newsletters',        'Content\Newsletters::index');
-$routes->get('content/documents',          'Content\Documents::index');
 $routes->get('content/pages',              'Content\Pages::index');
 $routes->get('content/page/(:segment)',    'Content\Pages::show/$1');
 
@@ -37,14 +35,6 @@ $routes->get('admin/me',      'Admin\Auth::me',       ['filter' => 'adminauth'])
 // Protected admin routes
 // ----------------------------------------------------------------
 $routes->put('admin/settings',                   'Admin\Settings::update',           ['filter' => 'adminauth']);
-
-$routes->post('admin/newsletters',               'Admin\Newsletters::create',        ['filter' => 'adminauth']);
-$routes->put('admin/newsletters/(:num)',          'Admin\Newsletters::update/$1',     ['filter' => 'adminauth']);
-$routes->delete('admin/newsletters/(:num)',       'Admin\Newsletters::delete/$1',     ['filter' => 'adminauth']);
-
-$routes->post('admin/documents',                 'Admin\Documents::create',          ['filter' => 'adminauth']);
-$routes->put('admin/documents/(:num)',            'Admin\Documents::update/$1',       ['filter' => 'adminauth']);
-$routes->delete('admin/documents/(:num)',         'Admin\Documents::delete/$1',       ['filter' => 'adminauth']);
 
 $routes->post('admin/upload',                     'Admin\Upload::store',              ['filter' => 'adminauth']);
 $routes->post('admin/upload-pdf',                 'Admin\UploadPdf::store',            ['filter' => 'adminauth']);
