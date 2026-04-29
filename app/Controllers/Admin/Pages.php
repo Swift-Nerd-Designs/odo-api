@@ -48,7 +48,7 @@ class Pages extends BaseController
     public function delete(string $slug): \CodeIgniter\HTTP\ResponseInterface
     {
         // Protect the core site pages from deletion
-        $protected = ['home', 'about', 'training', 'compliance', 'farm-development', 'projects', 'contact', 'downloads'];
+        $protected = ['home', 'about', 'services', 'contact'];
         if (in_array($slug, $protected)) {
             return $this->error("The '{$slug}' page cannot be deleted.", 403);
         }

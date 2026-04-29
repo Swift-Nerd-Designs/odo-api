@@ -39,7 +39,7 @@ class CreateCoreTables extends Migration
         $this->db->query("
             CREATE TABLE IF NOT EXISTS `pages` (
                 `slug`       VARCHAR(120)  NOT NULL,
-                `data`       LONGTEXT      NOT NULL DEFAULT '{}',
+                `data`       LONGTEXT      NOT NULL,
                 `updated_at` DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 PRIMARY KEY (`slug`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci

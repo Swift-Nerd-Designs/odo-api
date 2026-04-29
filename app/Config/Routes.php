@@ -15,6 +15,13 @@ $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 
 // ----------------------------------------------------------------
+// CORS preflight — must exist before routing so the CORS filter fires
+// ----------------------------------------------------------------
+$routes->options('(:any)', function () {
+    return service('response')->setStatusCode(200);
+});
+
+// ----------------------------------------------------------------
 // Public content routes (no authentication required)
 // ----------------------------------------------------------------
 $routes->get('content/settings',           'Content\Settings::index');
