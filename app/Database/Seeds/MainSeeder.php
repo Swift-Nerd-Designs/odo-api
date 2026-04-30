@@ -35,11 +35,12 @@ class MainSeeder extends Seeder
             'site_name'  => 'Odo Group',
             'email'      => 'consultation@odocorp.co.za',
             'phone'      => '+27 82 870 7275',
+            'whatsapp'   => '+27828707275',
             'address'    => '35 Tsitsikame Street, Secunda, MP 2302',
-            'facebook'   => '#',
-            'twitter'    => '#',
-            'instagram'  => '#',
-            'linkedin'   => '#',
+            'facebook'   => 'https://www.facebook.com/odogroupsa',
+            'twitter'    => '',
+            'instagram'  => '',
+            'linkedin'   => 'https://www.linkedin.com/company/odo-group',
         ];
 
         foreach ($settings as $key => $value) {
