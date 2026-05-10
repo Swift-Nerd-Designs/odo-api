@@ -438,6 +438,284 @@ class MainSeeder extends Seeder
                 ],
             ],
 
+            // ── Pricing ──────────────────────────────────────────────────
+            'pricing' => [
+                'seoTitle'       => 'IT Support & Web Design Pricing | Odo Group',
+                'seoDescription' => 'Transparent managed IT support from R1,500/month and fixed-price web design from R7,500. Flat rates, no hidden fees, and no lock-in surprises. South Africa-based.',
+                'image'          => '',
+                'content' => [
+                    'blocks' => [
+
+                        // ── Hero ──────────────────────────────────────────
+                        [
+                            'id'   => 'pricing-hero',
+                            'type' => 'hero',
+                            'data' => [
+                                'eyebrow'   => 'Managed IT Support & Web Development',
+                                'heading'   => 'Technology investment, clearly defined.',
+                                'body'      => 'Structured IT support programmes and fixed-scope web development engagements — each transparently priced, professionally delivered, and aligned to where your business is going.',
+                                'bgImage'   => '',
+                                'ctaLabel'  => '',
+                                'ctaHref'   => '',
+                                'statValue' => 'R1,500',
+                                'statLabel' => 'Managed IT support from / month',
+                            ],
+                        ],
+
+                        // ── IT Support Plans ──────────────────────────────
+                        [
+                            'id'   => 'pricing-it-plans',
+                            'type' => 'pricing_plans',
+                            'data' => [
+                                'eyebrow'   => 'Managed IT Support',
+                                'heading'   => 'Support Programmes',
+                                'priceUnit' => 'month',
+
+                                'p1Tier'     => 'Tier 1',
+                                'p1Name'     => 'Essential Care',
+                                'p1Target'   => 'Designed for businesses of up to 5 users requiring dependable, managed IT coverage',
+                                'p1PriceNum' => '1,500',
+                                'p1PriceVat' => 'R1,725',
+                                'p1CtaLabel' => 'Enquire Now',
+                                'p1CtaHref'  => '/contact',
+                                'p1Featured' => false,
+                                'p1Features' => "Remote IT support — Monday to Friday, 08:00 to 17:00\nDedicated helpdesk via email and WhatsApp\nAll requests logged, tracked, and referenced\nManaged antivirus and endpoint protection\nMonthly system health check with written summary\nPatch management for Windows and core business applications\nMicrosoft 365 email configuration and support",
+                                'p1Limits'   => 'Up to 5 devices · Next business day response · Remote only',
+                                'p1Tagline'  => '"A measured IT foundation for businesses that value operational consistency."',
+
+                                'p2Tier'     => 'Tier 2',
+                                'p2Name'     => 'Business Protect',
+                                'p2Target'   => 'Suited to growing businesses of up to 10 users requiring structured support and proactive oversight',
+                                'p2PriceNum' => '3,500',
+                                'p2PriceVat' => 'R4,025',
+                                'p2CtaLabel' => 'Enquire Now',
+                                'p2CtaHref'  => '/contact',
+                                'p2Featured' => false,
+                                'p2Features' => "All Essential Care inclusions, plus:\nPriority remote support — 4 to 8-hour response target\nScheduled onsite support — one visit per month (up to 4 hours)\nNetwork monitoring — router, Wi-Fi, firewall, and switching infrastructure\nBackup monitoring and management across cloud and local repositories\nMicrosoft 365 full administration and licence management\nUser provisioning and deprovisioning (up to 2 events per month)\nActive threat monitoring with monthly security summary",
+                                'p2Limits'   => 'Up to 10 devices · 4–8h response · 1 onsite visit / month',
+                                'p2Tagline'  => '"Proactive IT governance — structured to address issues before they become incidents."',
+
+                                'p3Tier'     => 'Tier 3',
+                                'p3Name'     => 'Premium IT Partner',
+                                'p3Target'   => 'Reserved for IT-reliant organisations of up to 20 users requiring a comprehensive managed IT partnership',
+                                'p3PriceNum' => '7,500',
+                                'p3PriceVat' => 'R8,625',
+                                'p3CtaLabel' => 'Enquire Now',
+                                'p3CtaHref'  => '/contact',
+                                'p3Featured' => true,
+                                'p3Features' => "All Business Protect inclusions, plus:\nUnlimited remote support tickets (subject to fair-use policy)\nPriority onsite support — up to 2 visits per month (up to 4 hours each)\n24/7 automated infrastructure monitoring with P1 on-call escalation\nAdvanced endpoint security — EDR with active threat response\nUser provisioning and deprovisioning (up to 5 events per month)\nAnnual disaster recovery planning and recovery testing\nServer and cloud infrastructure management (up to 3 servers)\nQuarterly IT strategy review and forward planning session\nSLA service credits applicable to P1 and P2 incidents",
+                                'p3Limits'   => 'Up to 20 devices · 1–2h P1 response · 2 onsite visits / month',
+                                'p3Tagline'  => '"A complete outsourced IT function — enterprise discipline, without the enterprise overhead."',
+                            ],
+                        ],
+
+                        // ── Trust Bar ─────────────────────────────────────
+                        [
+                            'id'   => 'pricing-trust',
+                            'type' => 'trust_bar',
+                            'data' => [
+                                'items' => [
+                                    ['icon' => '🔒', 'label' => 'POPIA Compliant',      'sub' => 'Data handled with legal and ethical rigour'   ],
+                                    ['icon' => '⚡', 'label' => '1-Hour P1 Response',   'sub' => 'SLA-backed on our Premium programme'          ],
+                                    ['icon' => '🏆', 'label' => '24/7 Monitoring',      'sub' => 'Continuous infrastructure alerting'           ],
+                                    ['icon' => '🇿🇦', 'label' => 'South Africa–Based',  'sub' => 'Local expertise, no offshoring'               ],
+                                    ['icon' => '📋', 'label' => 'Written SLA',          'sub' => 'Documented commitments on every engagement'   ],
+                                ],
+                            ],
+                        ],
+
+                        // ── IT Plan Comparison ────────────────────────────
+                        [
+                            'id'   => 'pricing-it-compare',
+                            'type' => 'comparison_table',
+                            'data' => [
+                                'heading' => 'IT Programme Comparison',
+                                'col1'    => 'Essential Care',
+                                'col2'    => 'Business Protect',
+                                'col3'    => 'Premium Partner',
+                                'rows'    => [
+                                    ['feature' => 'Monthly fee (excl. VAT)',       'c1' => 'R1,500',           'c2' => 'R3,500',           'c3' => 'R7,500'],
+                                    ['feature' => 'Device coverage',               'c1' => 'Up to 5',          'c2' => 'Up to 10',         'c3' => 'Up to 20'],
+                                    ['feature' => 'Support hours',                 'c1' => 'Mon–Fri 8am–5pm',  'c2' => 'Mon–Fri 8am–5pm',  'c3' => 'Business hrs + 24/7 P1'],
+                                    ['feature' => 'P1 response target',            'c1' => 'Within 4 hours',   'c2' => 'Within 2 hours',   'c3' => 'Within 1 hour'],
+                                    ['feature' => 'Onsite support',                'c1' => '—',                'c2' => '1 visit / month',  'c3' => 'Up to 2 / month'],
+                                    ['feature' => 'Network monitoring',            'c1' => '—',                'c2' => '✔',                'c3' => '24/7'],
+                                    ['feature' => 'Backup management',             'c1' => '—',                'c2' => '✔',                'c3' => '✔'],
+                                    ['feature' => 'Microsoft 365 admin',           'c1' => 'Email only',       'c2' => 'Full admin',        'c3' => 'Full admin'],
+                                    ['feature' => 'User onboarding / offboarding', 'c1' => '—',                'c2' => '2 events / month', 'c3' => '5 events / month'],
+                                    ['feature' => 'Advanced cybersecurity (EDR)',  'c1' => '—',                'c2' => 'Basic monitoring', 'c3' => 'Full EDR + response'],
+                                    ['feature' => 'Server & cloud support',        'c1' => '—',                'c2' => '—',                'c3' => '✔'],
+                                    ['feature' => 'Disaster recovery plan',        'c1' => '—',                'c2' => '—',                'c3' => '✔'],
+                                    ['feature' => 'IT strategy consulting',        'c1' => '—',                'c2' => '—',                'c3' => 'Quarterly'],
+                                    ['feature' => 'SLA service credits',           'c1' => '—',                'c2' => '—',                'c3' => 'P1 & P2 incidents'],
+                                ],
+                            ],
+                        ],
+
+                        // ── IT Add-Ons ────────────────────────────────────
+                        [
+                            'id'   => 'pricing-it-addons',
+                            'type' => 'addons',
+                            'data' => [
+                                'eyebrow' => 'Supplementary Services',
+                                'heading' => 'IT Supplementary Services',
+                                'items'   => [
+                                    ['icon' => '🖥️', 'name' => 'Additional Device Coverage',  'desc' => 'Extend managed coverage beyond your programme allocation — applicable to desktops, laptops, and network appliances.',             'price' => 'POA / device'],
+                                    ['icon' => '📱', 'name' => 'Mobile Device Management',     'desc' => 'MDM enrolment, policy enforcement, and remote wipe capability for iOS and Android business devices.',                          'price' => 'POA / month'],
+                                    ['icon' => '🔐', 'name' => 'Penetration Testing',          'desc' => 'Scheduled or on-demand vulnerability assessment with a formal report covering your network perimeter and endpoints.',           'price' => 'Quoted per scope'],
+                                    ['icon' => '🌐', 'name' => 'After-Hours Support Cover',    'desc' => 'Extended helpdesk availability beyond standard business hours, covering P1 and P2 incidents.',                                 'price' => 'POA / month'],
+                                    ['icon' => '☁️', 'name' => 'Cloud Migration',              'desc' => 'Formally scoped migration of on-premises infrastructure or data to Microsoft Azure, Microsoft 365, or AWS.',                   'price' => 'Quoted per project'],
+                                    ['icon' => '🖨️', 'name' => 'Hardware Procurement',         'desc' => 'Specification, sourcing, and deployment of laptops, desktops, networking equipment, and peripherals — at supplier pricing.',   'price' => 'At cost + setup fee'],
+                                    ['icon' => '🎓', 'name' => 'Cybersecurity Awareness',      'desc' => 'Staff training workshops addressing phishing, password discipline, and secure remote working — tailored to your environment.',  'price' => 'POA / session'],
+                                    ['icon' => '📞', 'name' => 'VoIP & Telephony',             'desc' => 'Deployment, administration, and ongoing support of cloud-based telephony systems integrated with your Microsoft 365 tenant.',   'price' => 'POA / month'],
+                                ],
+                            ],
+                        ],
+
+                        // ── Web Design Plans ──────────────────────────────
+                        [
+                            'id'   => 'pricing-web-plans',
+                            'type' => 'pricing_plans',
+                            'data' => [
+                                'eyebrow'     => 'Web Design & Development',
+                                'heading'     => 'Digital Development Packages',
+                                'priceUnit'   => 'once-off',
+                                'pricePrefix' => 'Starting from',
+
+                                'p1Tier'     => 'Starter',
+                                'p1Name'     => 'Starter Site',
+                                'p1Target'   => 'For businesses establishing a professional online presence',
+                                'p1PriceNum' => '7,500',
+                                'p1PriceVat' => 'R8,625',
+                                'p1CtaLabel' => 'Request a Quote',
+                                'p1CtaHref'  => '/contact',
+                                'p1Featured' => false,
+                                'p1Features' => "Up to 5 pages\nMobile-responsive design\nEnquiry and contact form\nFoundational on-page SEO configuration\nGoogle Maps integration\n30-day post-launch support",
+                                'p1Limits'   => 'Up to 5 pages · ~2 week delivery',
+                                'p1Tagline'  => '"A professional digital foundation, delivered on a defined timeline."',
+
+                                'p2Tier'     => 'Business',
+                                'p2Name'     => 'Business Site',
+                                'p2Target'   => 'For established businesses requiring a complete, branded digital presence',
+                                'p2PriceNum' => '16,500',
+                                'p2PriceVat' => 'R18,975',
+                                'p2CtaLabel' => 'Request a Quote',
+                                'p2CtaHref'  => '/contact',
+                                'p2Featured' => true,
+                                'p2Features' => "Up to 12 pages\nBespoke design aligned to your brand identity\nBlog and news module\nAdvanced on-page SEO configuration\nGoogle Analytics and Search Console integration\nSocial media profile integration\n60-day post-launch support",
+                                'p2Limits'   => 'Up to 12 pages · ~3–4 week delivery',
+                                'p2Tagline'  => '"A comprehensive web presence — built to your brief, structured for growth."',
+
+                                'p3Tier'     => 'E-Commerce',
+                                'p3Name'     => 'Online Store',
+                                'p3Target'   => 'For businesses with a defined e-commerce requirement',
+                                'p3PriceNum' => '32,500',
+                                'p3PriceVat' => 'R37,375',
+                                'p3CtaLabel' => 'Request a Quote',
+                                'p3CtaHref'  => '/contact',
+                                'p3Featured' => false,
+                                'p3Features' => "Unlimited product listings\nBespoke storefront design\nPayFast or Peach Payments integration\nOrder and inventory management\nCustomer accounts and wish lists\nAbandoned cart recovery\n90-day post-launch support",
+                                'p3Limits'   => 'Unlimited products · ~5–6 week delivery',
+                                'p3Tagline'  => '"A complete transactional platform, configured to sell from launch."',
+                            ],
+                        ],
+
+                        // ── Web Plan Comparison ───────────────────────────
+                        [
+                            'id'   => 'pricing-web-compare',
+                            'type' => 'comparison_table',
+                            'data' => [
+                                'heading' => 'Web Package Comparison',
+                                'col1'    => 'Starter Site',
+                                'col2'    => 'Business Site',
+                                'col3'    => 'Online Store',
+                                'rows'    => [
+                                    ['feature' => 'Starting from (excl. VAT)',  'c1' => 'R7,500',       'c2' => 'R16,500',       'c3' => 'R32,500'],
+                                    ['feature' => 'Number of pages',            'c1' => 'Up to 5',      'c2' => 'Up to 12',      'c3' => 'Unlimited'],
+                                    ['feature' => 'Mobile-responsive design',   'c1' => '✔',            'c2' => '✔',             'c3' => '✔'],
+                                    ['feature' => 'Custom brand design',        'c1' => '—',            'c2' => '✔',             'c3' => '✔'],
+                                    ['feature' => 'Blog / news module',         'c1' => '—',            'c2' => '✔',             'c3' => '✔'],
+                                    ['feature' => 'On-page SEO',                'c1' => 'Basic',        'c2' => 'Advanced',      'c3' => 'Advanced'],
+                                    ['feature' => 'Google Analytics',           'c1' => '—',            'c2' => '✔',             'c3' => '✔'],
+                                    ['feature' => 'Online store',               'c1' => '—',            'c2' => '—',             'c3' => '✔'],
+                                    ['feature' => 'Payment gateway',            'c1' => '—',            'c2' => '—',             'c3' => 'PayFast / Peach'],
+                                    ['feature' => 'Customer accounts',          'c1' => '—',            'c2' => '—',             'c3' => '✔'],
+                                    ['feature' => 'Post-launch support',        'c1' => '30 days',      'c2' => '60 days',       'c3' => '90 days'],
+                                    ['feature' => 'Estimated delivery',         'c1' => '~2 weeks',     'c2' => '~3–4 weeks',    'c3' => '~5–6 weeks'],
+                                ],
+                            ],
+                        ],
+
+                        // ── Web Add-Ons ───────────────────────────────────
+                        [
+                            'id'   => 'pricing-web-addons',
+                            'type' => 'addons',
+                            'data' => [
+                                'eyebrow' => 'Supplementary Web Services',
+                                'heading' => 'Web Enhancements & Retainers',
+                                'items'   => [
+                                    ['icon' => '🛡️', 'name' => 'Monthly Care Plan',        'desc' => 'Managed hosting, security patching, daily backups, and uptime monitoring — continuous protection for your digital asset.',          'price' => 'R450 / month'],
+                                    ['icon' => '✏️', 'name' => 'Content Retainer',          'desc' => 'Up to 2 hours of managed content updates per month — copy changes, imagery, blog entries, and structured edits.',                  'price' => 'R950 / month'],
+                                    ['icon' => '📈', 'name' => 'SEO Retainer',              'desc' => 'Keyword performance tracking, on-page optimisation, and a monthly summary report — a measured approach to organic visibility.',     'price' => 'R1,800 / month'],
+                                    ['icon' => '🎨', 'name' => 'Brand Identity',            'desc' => 'Professional logo design accompanied by a colour system, typography selection, and a foundational brand guide for consistent use.', 'price' => 'R3,500 once-off'],
+                                    ['icon' => '✍️', 'name' => 'Professional Copywriting',  'desc' => 'Web copy crafted for your intended audience — clear, brand-aligned, and structured for both readability and search performance.',   'price' => 'R600 / page'],
+                                    ['icon' => '📣', 'name' => 'Social Media Setup',        'desc' => 'Profile creation and visual alignment across up to 3 platforms, with a structured content calendar and branded templates.',         'price' => 'R1,800 once-off'],
+                                    ['icon' => '🌐', 'name' => 'Domain & Hosting',          'desc' => 'Domain registration and managed hosting configuration. First-year hosting included with Business and Online Store packages.',        'price' => 'R750 once-off'],
+                                    ['icon' => '🔗', 'name' => 'Third-Party Integrations',  'desc' => 'Structured integration of your site with CRMs, booking systems, live chat platforms, or any API-based tool your business requires.', 'price' => 'Quoted per scope'],
+                                ],
+                            ],
+                        ],
+
+                        // ── Why Partner With Us ───────────────────────────
+                        [
+                            'id'   => 'pricing-why',
+                            'type' => 'icon_cards',
+                            'data' => [
+                                'heading'    => 'The Case for Partnership',
+                                'cols'       => '4',
+                                'background' => 'dark',
+                                'items'      => [
+                                    ['title' => 'Defined Investment',           'body' => 'IT support programmes are flat-rate monthly. Web engagements are fixed-price. Every proposal is fully itemised — with no room for ambiguity.'],
+                                    ['title' => 'Structured Governance',        'body' => 'Infrastructure is monitored, patched, and reviewed on a consistent schedule. Issues are identified and addressed before they affect your operations.'],
+                                    ['title' => 'Unified Accountability',       'body' => 'Managed IT support and web development delivered by one team, under one agreement. A single point of accountability for your entire technology environment.'],
+                                    ['title' => 'Local Expertise',              'body' => 'A team that understands the South African business environment — load shedding contingencies, local ISPs, and POPIA obligations — with enterprise-grade discipline applied throughout.'],
+                                ],
+                            ],
+                        ],
+
+                        // ── How We Get Started ────────────────────────────
+                        [
+                            'id'   => 'pricing-process',
+                            'type' => 'timeline',
+                            'data' => [
+                                'eyebrow' => 'Engagement Process',
+                                'heading' => 'How an Engagement Begins',
+                                'layout'  => 'steps',
+                                'items'   => [
+                                    ['title' => 'Initial Consultation',   'desc' => 'A focused conversation to understand your business requirements — whether that is IT support, a web development engagement, or a combination of both.'],
+                                    ['title' => 'Proposal & Scoping',     'desc' => 'We document the full scope of work and present a clear, itemised proposal. Every line is accounted for before a commitment is made.'],
+                                    ['title' => 'Engagement Agreement',   'desc' => 'Your IT Service Level Agreement or web project brief is signed and filed. Scope, timeline, deliverables, and investment are formally confirmed.'],
+                                    ['title' => 'Delivery Commences',     'desc' => 'IT environments are brought under managed monitoring from day one. Web development engagements begin immediately following agreement sign-off.'],
+                                ],
+                            ],
+                        ],
+
+                        // ── CTA ───────────────────────────────────────────
+                        [
+                            'id'   => 'pricing-cta',
+                            'type' => 'cta',
+                            'data' => [
+                                'eyebrow'  => 'Begin the Conversation',
+                                'heading'  => 'The right technology partnership starts here.',
+                                'body'     => 'All pricing excludes VAT (currently 15%). IT support programmes are governed by a signed Service Level Agreement. Web development engagements are subject to a formal scoping document. Standard terms apply.',
+                                'ctaLabel' => 'Enquire Now',
+                                'ctaHref'  => '/contact',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
             // ── Contact ──────────────────────────────────────────────────
             'contact' => [
                 'seoTitle'       => 'Contact Us — Odo Group',
