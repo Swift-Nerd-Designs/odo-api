@@ -1,0 +1,6 @@
+site_name: Odo API
+site_description: API service for the Odo Group platform
+nav:
+  - Home: index.md
+plugins:
+  - techdocs-core
