@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: odo-api
+  description: API service for the Odo Group platform
+  annotations:
+    github.com/project-slug: Swift-Nerd-Designs/odo-api
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  lifecycle: production
+  owner: swift-nerd-designs
+  system: odo
